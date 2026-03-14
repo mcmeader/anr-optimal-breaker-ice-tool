@@ -1,3 +1,65 @@
-<button (click)="callApi()">test</button>
+<table mat-table matSort [dataSource]="datasource">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+      Name
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
 
-<table mat-table [dataSource]="dataSource"></table>
+  <ng-container matColumnDef="interfaceCost">
+    <th mat-header-cell *matHeaderCellDef>Interface Cost (cr/sub)</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.interfaceCost.credits.cost }}/{{ element.interfaceCost.credits.subs }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="boostCost">
+    <th mat-header-cell *matHeaderCellDef>Boost Cost (cr/str)</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.boostCost.credits.cost }}/{{ element.boostCost.credits.subs }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="baseStrength">
+    <th mat-header-cell *matHeaderCellDef>Stripped Text</th>
+    <td mat-cell *matCellDef="let element">{{ element.text }}</td>
+  </ng-container>
+
+  <!-- <ng-container matColumnDef="baseStrength">
+    <th mat-header-cell *matHeaderCellDef>Base Strength</th>
+    <td mat-cell *matCellDef="let element">{{ element.baseStrength }}</td>
+  </ng-container> -->
+
+  <!-- <ng-container matColumnDef="faction">
+    <th mat-header-cell *matHeaderCellDef>Faction</th>
+    <td mat-cell *matCellDef="let element">{{ element.faction }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cost">
+    <th mat-header-cell *matHeaderCellDef>Play Cost</th>
+    <td mat-cell *matCellDef="let element">{{ element.cost }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="influence">
+    <th mat-header-cell *matHeaderCellDef>Influence</th>
+    <td mat-cell *matCellDef="let element">{{ element.influence }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="memory">
+    <th mat-header-cell *matHeaderCellDef>Memory</th>
+    <td mat-cell *matCellDef="let element">{{ element.memory }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="legality">
+    <th mat-header-cell *matHeaderCellDef>Legality</th>
+    <td mat-cell *matCellDef="let element">{{ element.legality }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="breakerType">
+    <th mat-header-cell *matHeaderCellDef>Breaker Types</th>
+    <td mat-cell *matCellDef="let element">{{ element.breakerType }}</td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

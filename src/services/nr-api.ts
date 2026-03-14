@@ -12,6 +12,7 @@ export class NRApi {
   private baseUrl = 'https://netrunnerdb.com/';
 
   getAllCards(): Observable<ApiCard[]> {
+    // return of(
     return this.http.get<AllCardResponse>(this.baseUrl.concat('api/2.0/public/cards')).pipe(
       take(1),
       map((val: AllCardResponse) => val.data),

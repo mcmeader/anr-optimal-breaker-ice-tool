@@ -1,3 +1,4 @@
+//Api interfaces
 export interface AllCardResponse {
   data: ApiCard[];
   imageUrlTemplate: string;
@@ -8,33 +9,38 @@ export interface AllCardResponse {
 }
 
 export interface ApiCard {
-  code: number;
+  code: string;
   cost: number;
   deck_limit: number;
-  faction_code: RunnerFaction | CorpFaction;
+  faction_code: string | RunnerFaction | CorpFaction;
   faction_cost: number;
   illustrator: string;
   keywords: string;
   memory_cost: number;
   pack_code: string;
   position: number;
-  quantity: 3;
-  side_code: Side;
+  quantity: number;
+  side_code: string | Side;
   stripped_text: string;
   stripped_title: string;
-  type_code: RelevantCardTypes;
+  text: string;
+  strength: number | null;
+  type_code: string | RelevantCardTypes;
   uniqueness: boolean;
 }
+//
 
+//Parsed interfaces
 export interface ParsedBreaker {
   name: string;
+  text: string;
   faction: RunnerFaction;
   influence: number;
   memory: number;
   legality: Format[];
   cost: number;
-  interfaceCost: number;
-  boostCost: number;
+  interfaceCost: BreakCost;
+  boostCost: BoostCost;
   baseStrength: number;
   breakerType: BreakerType[];
 }
@@ -50,6 +56,7 @@ export interface ParsedIce {
   strength: number;
   iceType: IceType[];
 }
+//
 
 export interface IceInteraction {
   breakerName: string;
@@ -58,14 +65,39 @@ export interface IceInteraction {
 }
 
 export interface BreakCost {
-  credits: number;
-  netDamage: number;
-  meatDamage: number;
-  coreDamage: number;
-  cards: number;
-  clicks: number;
-  virusCounters: number;
-  powerCounters: number;
+  credits: Break;
+  netDamage: Break;
+  meatDamage: Break;
+  coreDamage: Break;
+  cards: Break;
+  clicks: Break;
+  virusCounters: Break;
+  powerCounters: Break;
+}
+
+export interface BoostCost {
+  credits: Boost;
+  netDamage: Boost;
+  meatDamage: Boost;
+  coreDamage: Boost;
+  cards: Boost;
+  clicks: Boost;
+  virusCounters: Boost;
+  powerCounters: Boost;
+}
+
+export interface Break {
+  cost: number;
+  subs: number;
+  stealth: boolean;
+  usableTimes: number;
+}
+
+export interface Boost {
+  cost: number;
+  subs: number;
+  stealth: boolean;
+  usableTimes: number;
 }
 
 export enum Format {
@@ -76,15 +108,15 @@ export enum Format {
 
 export enum RelevantCardTypes {
   PROGRAM = 'program',
-  BREAKER = 'Icebreaker',
+  BREAKER = 'icebreaker',
   ICE = 'ice',
 }
 
 export enum BreakerType {
-  DECODER = 'Decoder',
-  FRACTER = 'Fracter',
-  KILLER = 'Killer',
-  AI = 'AI',
+  DECODER = 'decoder',
+  FRACTER = 'fracter',
+  KILLER = 'killer',
+  AI = 'ai',
   OTHER = 'other',
 }
 
