@@ -1,5 +1,5 @@
 export interface AllCardResponse {
-  data: Card[];
+  data: ApiCard[];
   imageUrlTemplate: string;
   last_updated: Date;
   success: boolean;
@@ -7,7 +7,7 @@ export interface AllCardResponse {
   version_number: string;
 }
 
-export interface Card {
+export interface ApiCard {
   code: number;
   cost: number;
   deck_limit: number;
@@ -24,11 +24,54 @@ export interface Card {
   stripped_title: string;
   type_code: RelevantCardTypes;
   uniqueness: boolean;
-  additionalFields: {
-    parsedSubs: string[];
-    parsedInterface: number;
-    parsedBoost: number;
-  };
+}
+
+export interface ParsedBreaker {
+  name: string;
+  faction: RunnerFaction;
+  influence: number;
+  memory: number;
+  legality: Format[];
+  cost: number;
+  interfaceCost: number;
+  boostCost: number;
+  baseStrength: number;
+  breakerType: BreakerType[];
+}
+
+export interface ParsedIce {
+  name: string;
+  faction: CorpFaction;
+  influence: number;
+  legality: Format[];
+  cost: number;
+  encounterEffect: string;
+  subroutines: string[];
+  strength: number;
+  iceType: IceType[];
+}
+
+export interface IceInteraction {
+  breakerName: string;
+  iceName: string;
+  costToBreak: BreakCost;
+}
+
+export interface BreakCost {
+  credits: number;
+  netDamage: number;
+  meatDamage: number;
+  coreDamage: number;
+  cards: number;
+  clicks: number;
+  virusCounters: number;
+  powerCounters: number;
+}
+
+export enum Format {
+  STANDARD = 'standard',
+  STARTUP = 'startup',
+  ETERNAL = 'eternal',
 }
 
 export enum RelevantCardTypes {

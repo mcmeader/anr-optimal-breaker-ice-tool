@@ -1,18 +1,18 @@
 import { Injectable, signal } from '@angular/core';
-import { Card } from '../cards.model';
+import { ParsedBreaker, ParsedIce } from '../cards.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AllCards {
-  fracters = signal<Card[]>([]);
-  decoders = signal<Card[]>([]);
-  killers = signal<Card[]>([]);
-  ai = signal<Card[]>([]);
-  other = signal<Card[]>([]);
+  fracters = signal<ParsedBreaker[]>([]);
+  decoders = signal<ParsedBreaker[]>([]);
+  killers = signal<ParsedBreaker[]>([]);
+  ai = signal<ParsedBreaker[]>([]);
+  other = signal<ParsedBreaker[]>([]);
 
-  barriers = signal<Card[]>([]);
-  codeGates = signal<Card[]>([]);
-  sentries = signal<Card[]>([]);
-  otherIce = signal<Card[]>([]);
+  barriers = signal<ParsedIce[]>([]);
+  codeGates = signal<ParsedIce[]>([]);
+  sentries = signal<ParsedIce[]>([]);
+  otherIce = signal<ParsedIce[]>([]);
 }
