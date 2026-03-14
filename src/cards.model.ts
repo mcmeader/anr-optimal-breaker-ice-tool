@@ -16,7 +16,7 @@ export interface ApiCard {
   faction_cost: number;
   illustrator: string;
   keywords: string;
-  memory_cost: number;
+  memory_cost?: number;
   pack_code: string;
   position: number;
   quantity: number;
@@ -51,10 +51,12 @@ export interface ParsedIce {
   influence: number;
   legality: Format[];
   cost: number;
+  text: string;
   encounterEffect: string;
   subroutines: string[];
   strength: number;
   iceType: IceType[];
+  iceSubTypes: IceSubType[];
 }
 //
 
@@ -64,11 +66,42 @@ export interface IceInteraction {
   costToBreak: BreakCost;
 }
 
+export interface IceSubroutine {
+  etr: boolean;
+  trace: Trace;
+  damage: DamageType;
+  clicks: number;
+  trash: TrashType;
+  runner: CreditChange;
+  corp: CreditChange;
+  purge: boolean;
+}
+
+export interface CreditChange {
+  gain: number;
+  loss: number;
+}
+
+export interface Trace {
+  value: number;
+  effect: IceSubroutine;
+}
+
+export interface DamageType {
+  netDamage: number;
+  meatDamage: number;
+  coreDamage: number;
+}
+
+export interface TrashType {
+  program: number;
+  hardware: number;
+  resource: number;
+}
+
 export interface BreakCost {
   credits: Break;
-  netDamage: Break;
-  meatDamage: Break;
-  coreDamage: Break;
+  damage?: DamageType;
   cards: Break;
   clicks: Break;
   virusCounters: Break;
@@ -89,8 +122,8 @@ export interface BoostCost {
 export interface Break {
   cost: number;
   subs: number;
-  stealth: boolean;
-  usableTimes: number;
+  stealth?: boolean;
+  usableTimes?: number;
 }
 
 export interface Boost {
@@ -125,6 +158,24 @@ export enum IceType {
   CODE_GATE = 'code_gate',
   SENTRY = 'sentry',
   NO_MAIN_TYPE = 'none',
+}
+
+export enum IceSubType {
+  TRACER = 'tracer',
+  PSI = 'psi',
+  AP = 'ap',
+  BIOROID = 'bioroid',
+  DESTROYER = 'destroyer',
+  AMBUSH = 'ambush',
+  OBSERVER = 'observer',
+  HARMONIC = 'harmonic',
+  NEXT = 'next',
+  DEFLECTOR = 'deflector',
+  LIABILITY = 'liability',
+  MORPH = 'morph',
+  ADVERTISEMENT = 'advertisement',
+  TRAP = 'trap',
+  EXPENDABLE = 'expendable',
 }
 
 export enum Side {
