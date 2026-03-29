@@ -10,21 +10,21 @@ export interface AllCardResponse {
 
 export interface ApiCard {
   code: string;
-  cost: number;
+  cost?: number | null;
   deck_limit: number;
   faction_code: string | RunnerFaction | CorpFaction;
   faction_cost: number;
-  illustrator: string;
-  keywords: string;
+  illustrator?: string;
+  keywords?: string;
   memory_cost?: number;
   pack_code: string;
   position: number;
   quantity: number;
   side_code: string | Side;
-  stripped_text: string;
+  stripped_text?: string;
   stripped_title: string;
-  text: string;
-  strength: number | null;
+  text?: string;
+  strength?: number | null;
   type_code: string | RelevantCardTypes;
   uniqueness: boolean;
 }
@@ -43,6 +43,8 @@ export interface ParsedBreaker {
   boostCost: BoostCost;
   baseStrength: number;
   breakerType: BreakerType[];
+  set: string;
+  imageCode: string;
 }
 
 export interface ParsedIce {
@@ -53,10 +55,11 @@ export interface ParsedIce {
   cost: number;
   text: string;
   encounterEffect: string;
-  subroutines: string[];
+  subroutines: IceSubroutine[];
   strength: number;
   iceType: IceType[];
   iceSubTypes: IceSubType[];
+  imageCode: string;
 }
 //
 
@@ -64,17 +67,25 @@ export interface IceInteraction {
   breakerName: string;
   iceName: string;
   costToBreak: BreakCost;
+  smartBreakCost: BreakCost;
+  canFullBreak: boolean;
 }
 
 export interface IceSubroutine {
-  etr: boolean;
-  trace: Trace;
-  damage: DamageType;
-  clicks: number;
-  trash: TrashType;
-  runner: CreditChange;
-  corp: CreditChange;
-  purge: boolean;
+  etr?: EndRun;
+  trace?: Trace;
+  damage?: DamageType;
+  clicks?: number;
+  trash?: TrashType;
+  runner?: CreditChange;
+  corp?: CreditChange;
+  purge?: boolean;
+  tags?: number;
+}
+
+export interface EndRun {
+  conditional: boolean;
+  requiresTag: boolean;
 }
 
 export interface CreditChange {
@@ -84,7 +95,7 @@ export interface CreditChange {
 
 export interface Trace {
   value: number;
-  effect: IceSubroutine;
+  effect?: IceSubroutine;
 }
 
 export interface DamageType {
@@ -201,3 +212,58 @@ export enum CorpFaction {
   WEYLAND = 'weyland-consortium',
   NEUTRAL = 'neutral-corp',
 }
+
+export interface BannedList {
+  id: number;
+  date_creation: Date;
+  date_update: Date;
+  code: string;
+  name: string;
+  active: boolean;
+  date_start: Date;
+  cards: {
+    string: { deck_limit?: number; global_penalty?: number };
+  };
+}
+
+export interface ParsedBanList {
+  [Format.ETERNAL]: string[];
+  [Format.STANDARD]: string[];
+  [Format.STARTUP]: string[];
+}
+
+export interface CycleDataResponse {
+  data: CycleData[];
+  total: number;
+  success: boolean;
+  version_number: string;
+  last_updated: Date;
+}
+
+export interface CycleData {
+  code: string;
+  name: string;
+  position: number;
+  size: number;
+  rotated: boolean;
+}
+
+export interface PackDataResponse {
+  data: PackData[];
+  total: number;
+  success: boolean;
+  version_number: string;
+  last_updated: Date;
+}
+
+export interface PackData {
+  code: string;
+  cycle_code: string;
+  date_release: Date;
+  name: string;
+  position: number;
+  size: number;
+  ffg_id: number | null;
+}
+
+//"imageUrlTemplate": "https://card-images.netrunnerdb.com/v2/large/{code}.jpg",
