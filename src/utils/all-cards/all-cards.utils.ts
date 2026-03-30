@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { ParsedBreaker, ParsedIce } from '../models/cards.model';
+import { ParsedBreaker } from '../../models/breaker-model';
+import { ParsedIce } from '../../models/ice-model';
 
 @Injectable({
   providedIn: 'root',

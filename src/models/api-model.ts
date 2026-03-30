@@ -1,4 +1,4 @@
-import { CorpFaction, RelevantCardTypes, RunnerFaction, Side } from './cards.model';
+import { CorpFaction, RelevantCardTypes, RunnerFaction, Side } from './enums';
 
 export interface AllCardResponse {
   data: ApiCard[];
@@ -77,4 +77,15 @@ export interface PackData {
   position: number;
   size: number;
   ffg_id: number | null;
+}
+
+export interface IceInteraction {
+  breaker: string;
+  ice: string;
+  // breaker: ParsedBreaker;
+  // ice: ParsedIce;
+  costToBreak: number;
+  // costToBreak: BreakCost;
+  // smartBreakCost: BreakCost;
+  canFullBreak: boolean;
 }

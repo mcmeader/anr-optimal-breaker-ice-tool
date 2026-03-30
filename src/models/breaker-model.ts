@@ -44,7 +44,7 @@ export interface Break {
 
 export interface Boost {
   cost: number;
-  subs: number;
+  amount: number;
   stealth: boolean;
   usableTimes: number;
 }
