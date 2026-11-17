@@ -1,5 +1,13 @@
 import { JsonPipe } from '@angular/common';
-import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  signal,
+  ViewChild,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ApiCard, IceInteraction } from '../models/api-model';
@@ -20,6 +28,7 @@ import { BreakerInterfaceUtil } from '../utils/breaker/breaker-interface-util';
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatTableModule, MatSortModule, JsonPipe],
 })
 export class App implements OnInit, AfterViewInit {
